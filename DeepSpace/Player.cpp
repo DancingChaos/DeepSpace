@@ -1,9 +1,9 @@
 #include "Player.h"
 //Constructors
 Player::Player(sf::Vector2f position, sf::String path_to_texture,
-    sf::Vector2f speed, float health, float fire_delay, float cooldown)
+    sf::Vector2f speed, float health, float cooldown)
     : position(position), speed(speed), health(health), cooldown(cooldown),
-    fire_delay(fire_delay), isShootReady(true) {
+    isShootReady(true), fire_delay(cooldown) {
     //Loading texture       
     if (!this->texture.loadFromFile(path_to_texture)) {
         std::cout << "Error to load player" << std::endl;
@@ -18,9 +18,9 @@ Player::Player(sf::Vector2f position, sf::String path_to_texture,
     this->sprite.setPosition(position);
 }
 Player::Player(float x, float y, sf::String path_to_texture,
-    sf::Vector2f speed, float health, float fire_delay, float cooldown)
-    : speed(speed), health(health), fire_delay(fire_delay),
-    isShootReady(true), cooldown(cooldown)
+    sf::Vector2f speed, float health, float cooldown)
+    : speed(speed), health(health), isShootReady(true), cooldown(cooldown),
+    fire_delay(cooldown)
 {
     //Texture load
     if (!this->texture.loadFromFile(path_to_texture)) {
@@ -66,13 +66,14 @@ void Player::shoot() {
         this->fire_delay = cooldown;
         this->isShootReady = false;
 }
+//Time before next bullet
 void Player::reloading() {
-    if (this->fire_delay <= 0) {
+    if (this->fire_delay <= NULL) {
         isShootReady = true;
     }
     else {
         isShootReady = false;
-        this->fire_delay -= 0.05f;
+        this->fire_delay -= 1.0f;
     }
 }
 

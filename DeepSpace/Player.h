@@ -21,16 +21,16 @@ public:
 	bool isShootReady;
 	//Constructor
 	Player(float x, float y,sf::String path_to_texture,
-		sf::Vector2f speed, float health,float fire_delay,float cooldown);
+		sf::Vector2f speed, float health,float cooldown);
 	Player(sf::Vector2f position,sf::String path_to_texture, 
-		sf::Vector2f speed, float health,float fire_delay,float cooldown);
+		sf::Vector2f speed, float health,float cooldown);
 
-	sf::Vector2f getPosition() { return this->position; };
+	sf::Vector2f& getPosition() { return this->position; };
 	void setPosition(float x, float y) { this->position.x = x, this->position.y = y; }
 
-	sf::Sprite getSprite() { return this->sprite; }
+	sf::Sprite& getSprite() { return this->sprite; }
 
-	sf::Vector2f getSpeed() { return this->speed; }
+	sf::Vector2f& getSpeed() { return this->speed; }
 	float getFireDelay() { return this->fire_delay; }
 
 	void move(float xSpeed,float ySpeed);

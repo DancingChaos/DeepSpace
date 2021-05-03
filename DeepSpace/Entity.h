@@ -12,7 +12,6 @@ public:
 
 	virtual void flight();
 	virtual void hit();
-	virtual void death();
 	sf::Vector2f getPosition() { return this->position; }
 	void setPosition(float x, float y) { 
 		this->position.x = x; 
