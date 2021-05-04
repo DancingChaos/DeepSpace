@@ -1,5 +1,6 @@
 #include "Bullet.h"
 
+//Functions
 Bullet::Bullet(sf::Vector2f& playerPosition, sf::String& pathToTexture,
     float speed){
     if (!this->texture.loadFromFile(pathToTexture)) {
@@ -21,3 +22,8 @@ void Entity::flight() {
 void Entity::hit() {
 
 }
+
+//Getters
+float Entity::getSpeed() { return this->speed; }
+sf::Vector2f& Entity::getPosition() { return this->position; }
+sf::Sprite& Entity::getSprite() { return this->sprite; }

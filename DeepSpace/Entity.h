@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 class Entity {
-public:
+protected:
 	float speed;
 	float damage;
 	float range;
@@ -10,11 +10,15 @@ public:
 	sf::Texture texture;
 	sf::Sprite sprite;
 
+public:
 	virtual void flight();
 	virtual void hit();
-	sf::Vector2f getPosition() { return this->position; }
 	void setPosition(float x, float y) { 
 		this->position.x = x; 
 		this->position.y = y;
 	}
+
+	virtual float getSpeed();
+	virtual sf::Vector2f& getPosition();
+	virtual sf::Sprite& getSprite();
 };

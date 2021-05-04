@@ -13,10 +13,16 @@ private:
 	float stars_speed;
 	sf::Vector2f position;
 public:
-	Environment(sf::String pathToBackground,sf::String pathToStars, sf::Vector2u windowSize);
+
+	//Constructors
+	Environment(sf::String& pathToBackground,sf::String& pathToStars, sf::Vector2u windowSize);
+	
+	//Functions
 	void movement(float stars_speed,int windowWidth);
-	sf::Sprite getBgSprite();
-	sf::Sprite getStarsSprite();
+
+	//Getters
+	sf::Sprite& getBgSprite();
+	sf::Sprite& getStarsSprite();
 
 	
 };

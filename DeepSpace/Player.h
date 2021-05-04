@@ -12,31 +12,36 @@ private:
 	sf::Sprite sprite;
 
 	float health;
-	float fire_delay;
-	const float cooldown;
-
+	float fireDelay;
+	float cooldown;
+	float reloadSpeed;
 	float width, height;
+
 public:
 
 	bool isShootReady;
 	//Constructor
-	Player(float x, float y,sf::String path_to_texture,
-		sf::Vector2f speed, float health,float cooldown);
-	Player(sf::Vector2f position,sf::String path_to_texture, 
-		sf::Vector2f speed, float health,float cooldown);
+	Player(float x, float y, sf::String path_to_texture, sf::Vector2f speed, float health);
+	Player(sf::Vector2f position, sf::String path_to_texture, sf::Vector2f speed, float health);
 
-	sf::Vector2f& getPosition() { return this->position; };
-	void setPosition(float x, float y) { this->position.x = x, this->position.y = y; }
-
-	sf::Sprite& getSprite() { return this->sprite; }
-
-	sf::Vector2f& getSpeed() { return this->speed; }
-	float getFireDelay() { return this->fire_delay; }
-
-	void move(float xSpeed,float ySpeed);
+	//Functions
+	void move(float xSpeed, float ySpeed);
 	void borderCheck(sf::Vector2u windowSize);
+	void shoot(float cooldown);
+	void reloading(float reloadSpeed);
 
-	void shoot();
-	void reloading();
+	//Getters
+	sf::Sprite& getSprite() { return this->sprite; }
+	sf::Vector2f& getSpeed() { return this->speed; }
+	sf::Vector2f& getPosition() { return this->position; };
+
+	float getFireDelay() { return this->fireDelay; }
+	float getReloadSpeed() { return this->reloadSpeed; }
+	float getCooldown() { return this->cooldown; }
+
+	//Setters
+	void setReloadSpeed(float newReloadSpeed) { this->reloadSpeed = newReloadSpeed; }
+	void setCooldown(float newCooldown) { this->reloadSpeed = newCooldown; }
+	void setPosition(float x, float y) { this->position.x = x, this->position.y = y; }
 };
 
