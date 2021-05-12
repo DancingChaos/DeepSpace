@@ -1,10 +1,22 @@
 #include "Player.h"
-//Constructors
-Player::Player(sf::Vector2f position, sf::String path_to_texture, sf::Vector2f speed, float health)
+
+
+
+#pragma region Constructors
+Player::Player(std::string pathToCfg, sf::String pathToSprite) {
+    if (!this->texture.loadFromFile(pathToSprite)) {
+        std::cout << "Error to load player" << std::endl;
+    }
+    loadConfig(pathToCfg);
+
+    this->sprite.setTexture(this->texture);
+    this->sprite.setPosition(this->position.x, this->position.y);
+}
+Player::Player(sf::Vector2f position, sf::String pathToTexture, sf::Vector2f speed, float health)
         : position(position), speed(speed), health(health), isShootReady(true) {
    
     //Loading texture       
-    if (!this->texture.loadFromFile(path_to_texture)) {
+    if (!this->texture.loadFromFile(pathToTexture)) {
         std::cout << "Error to load player" << std::endl;
     }
 
@@ -22,11 +34,11 @@ Player::Player(sf::Vector2f position, sf::String path_to_texture, sf::Vector2f s
 
     this->sprite.setPosition(position);
 }
-Player::Player(float x, float y, sf::String path_to_texture, sf::Vector2f speed, float health)
+Player::Player(float x, float y, sf::String pathToTexture, sf::Vector2f speed, float health)
     : speed(speed), health(health), isShootReady(true){
 
     //Texture load
-    if (!this->texture.loadFromFile(path_to_texture)) {
+    if (!this->texture.loadFromFile(pathToTexture)) {
         std::cout << "Error to load player" << std::endl;
     }
 
@@ -49,9 +61,38 @@ Player::Player(float x, float y, sf::String path_to_texture, sf::Vector2f speed,
     //Set sprite position
     this->sprite.setPosition(position);
 }
+#pragma endregion
 
-//Functions
 
+#pragma region Functions\
+//Config
+void Player::loadConfig(std::string pathToCfg) {
+    std::ifstream fin(pathToCfg);
+    std::string line;
+    while (getline(fin, line)) {
+        std::istringstream sin(line.substr(line.find("=") + 1));
+        if (line.find("positionX") != -1)
+            sin >> this->position.x;
+        else if (line.find("positionY") != -1)
+            sin >> this->position.y;
+        else if (line.find("width") != -1)
+            sin >> this->width;
+        else if (line.find("height") != -1)
+            sin >> this->height;
+        else if (line.find("fireDelay ") != -1)
+            sin >> this->fireDelay;
+        else if (line.find("cooldown") != -1)
+            sin >> this->cooldown;
+        else if (line.find("reloadSpeed") != -1)
+            sin >> this->reloadSpeed;
+        else if (line.find("speedX") != -1)
+            sin >> this->speed.x;
+        else if (line.find("speedY") != -1)
+            sin >> this->speed.y;
+        else if (line.find("isShootReady") != -1)
+            sin >> this->isShootReady;
+    }
+}
 //Movement
 void Player::move(float xSpeed, float ySpeed) {
     //Movement(Changing position)
@@ -91,5 +132,6 @@ void Player::reloading(float reloadSpeed) {
         this->fireDelay -= reloadSpeed;
     }
 }
+#pragma endregion
 
 

@@ -1,7 +1,7 @@
 #include "Bullet.h"
 
 //Functions
-Bullet::Bullet(sf::Vector2f& playerPosition, sf::String& pathToTexture,
+Bullet::Bullet(sf::Vector2f& playerPosition, const char* pathToTexture,
     float speed){
     if (!this->texture.loadFromFile(pathToTexture)) {
         std::cout << "Error to load player" << std::endl;

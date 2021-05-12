@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include "Bullet.h"
 class Player
 {
@@ -21,10 +23,12 @@ public:
 
 	bool isShootReady;
 	//Constructor
+	Player(std::string pathToCfg, sf::String pathToSprite);
 	Player(float x, float y, sf::String path_to_texture, sf::Vector2f speed, float health);
 	Player(sf::Vector2f position, sf::String path_to_texture, sf::Vector2f speed, float health);
 
 	//Functions
+	void loadConfig(std::string pathToCfg);
 	void move(float xSpeed, float ySpeed);
 	void borderCheck(sf::Vector2u windowSize);
 	void shoot(float cooldown);

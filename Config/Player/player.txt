@@ -1,0 +1,11 @@
+positionX = 0
+positionY = 200
+width = 100.0
+height = 50.0
+health = 3
+fireDelay = 0.0
+cooldown = 100.0
+reloadSpeed = 1.0
+speedX = 1
+speedY = 1
+isShootReady = true

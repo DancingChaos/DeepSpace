@@ -10,19 +10,20 @@ private:
 	sf::Texture starsTexture;
 	sf::Sprite starsSprite;
 
-	float stars_speed;
-	sf::Vector2f position;
+	float starsSpeed;
 public:
 
 	//Constructors
-	Environment(sf::String& pathToBackground,sf::String& pathToStars, sf::Vector2u windowSize);
+	Environment(const char* pathToBackground,const char* pathToStars, sf::Vector2u windowSize);
 	
 	//Functions
-	void movement(float stars_speed,int windowWidth);
+	void movement(float starsSpeed,int windowWidth);
 
 	//Getters
 	sf::Sprite& getBgSprite();
 	sf::Sprite& getStarsSprite();
+
+	float getStarsSpeed() { return this->starsSpeed; }
 
 	
 };
