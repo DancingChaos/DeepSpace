@@ -8,4 +8,5 @@ cooldown = 100.0
 reloadSpeed = 1.0
 speedX = 1
 speedY = 1
-isShootReady = true
+isShootReady = 1
+isAlive = 1

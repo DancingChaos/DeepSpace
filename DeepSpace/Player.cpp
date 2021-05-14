@@ -1,70 +1,31 @@
 #include "Player.h"
-
-
-
 #pragma region Constructors
-Player::Player(std::string pathToCfg, sf::String pathToSprite) {
-    if (!this->texture.loadFromFile(pathToSprite)) {
+Player::Player(std::string pathToCfg, const char* pathToTexture, const char* pathToSound) {
+    if (!this->texture.loadFromFile(pathToTexture)) {
         std::cout << "Error to load player" << std::endl;
     }
-    loadConfig(pathToCfg);
+    if (!this->soundBuffer.loadFromFile(pathToSound)) {
+        std::cout << "Error to load sound" << std::endl;
+    }
 
+    soundBuffer.loadFromFile(pathToSound);
+    shootSound.setBuffer(soundBuffer);
+
+    loadConfig(pathToCfg);
+    //Sound Buffer to Sound
     this->sprite.setTexture(this->texture);
     this->sprite.setPosition(this->position.x, this->position.y);
-}
-Player::Player(sf::Vector2f position, sf::String pathToTexture, sf::Vector2f speed, float health)
-        : position(position), speed(speed), health(health), isShootReady(true) {
-   
-    //Loading texture       
-    if (!this->texture.loadFromFile(pathToTexture)) {
-        std::cout << "Error to load player" << std::endl;
-    }
-
-    //Default init
-    this->cooldown = 100.0f;
-    this->fireDelay = 0.0f;
-    this->reloadSpeed = 1.0f;
-
-    //Texture to sprite
-    this->sprite.setTexture(this->texture);
-
-    //Width/Height of ship
-    this->width = 100.0f;
-    this->height = 50.0f;
-
-    this->sprite.setPosition(position);
-}
-Player::Player(float x, float y, sf::String pathToTexture, sf::Vector2f speed, float health)
-    : speed(speed), health(health), isShootReady(true){
-
-    //Texture load
-    if (!this->texture.loadFromFile(pathToTexture)) {
-        std::cout << "Error to load player" << std::endl;
-    }
-
-    //Default init
-    this->cooldown = 100.0f;
-    this->fireDelay = 0.0f;
-    this->reloadSpeed = 1.0f;
-
-    //Texture to sprite
-    this->sprite.setTexture(this->texture);
-
-    //Start position
-    this->position.x = x;
-    this->position.y = y;
-    
-    //Width/Height of ship
-    this->width = 100.0f;
-    this->height = 50.0f;
-
-    //Set sprite position
-    this->sprite.setPosition(position);
 }
 #pragma endregion
 
 
-#pragma region Functions\
+#pragma region Functions
+//Updating
+void Player::update() {
+    if (this->health <= 0) {
+        this->isAlive = false;
+    }
+}
 //Config
 void Player::loadConfig(std::string pathToCfg) {
     std::ifstream fin(pathToCfg);
@@ -91,6 +52,10 @@ void Player::loadConfig(std::string pathToCfg) {
             sin >> this->speed.y;
         else if (line.find("isShootReady") != -1)
             sin >> this->isShootReady;
+        else if (line.find("isAlive") != -1)
+            sin >> this->isAlive;
+        else if (line.find("health") != -1)
+            sin >> this->health;
     }
 }
 //Movement
@@ -119,8 +84,9 @@ void Player::borderCheck(sf::Vector2u windowSize) {
 }
 //Shooting
 void Player::shoot(float cooldown) {
-        this->fireDelay = this->cooldown;
-        this->isShootReady = false;
+    this->shootSound.play();
+    this->fireDelay = this->cooldown;
+    this->isShootReady = false;
 }
 //Time before next bullet
 void Player::reloading(float reloadSpeed) {

@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Asteroid.cpp" />
+    <ClCompile Include="AsteroidFactory.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="DeepSpace.cpp" />
     <ClCompile Include="Environment.cpp" />
@@ -160,11 +161,13 @@
   <ItemGroup>
     <ClInclude Include="Additional.h" />
     <ClInclude Include="Asteroid.h" />
+    <ClInclude Include="AsteroidFactory.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Environment.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SpaceObject.h" />
+    <ClInclude Include="WindowParams.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

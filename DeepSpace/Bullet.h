@@ -1,10 +1,9 @@
 #pragma once
 #include "Entity.h"
-#include <iostream>
 class Bullet : public Entity
 {
 public:
 	//Constructor
-	Bullet(sf::Vector2f& playerPosition, const char* pathToTexture,float speed);
+	Bullet(sf::Vector2f& playerPosition, const char* pathToTexture, float speed);
 };
 
