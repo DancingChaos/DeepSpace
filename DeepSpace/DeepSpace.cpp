@@ -92,7 +92,7 @@ int main()
 		//Clearing window
 		window.clear();
 
-		//Draw Environment
+		//Draw Environment`
 		window.draw(env.getBgSprite());
 		window.draw(env.getStarsSprite());
 
